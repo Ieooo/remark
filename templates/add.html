@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>ADD</title>
+    <link rel="icon" href="/static/logo.png" type="image/x-icon" id="page_favionc">
+    <link href="/static/min.css" rel="stylesheet">
+    <link rel="alternate icon" type="image/png" href="/static/logo.png">
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/layer.css" id="layui_layer_skinlayercss" style=""/>
+    <style>hcfy-result.__hcfy__result__both__{border: 1px dotted}</style>
+</head>
+<body>
+<div class="top-wrap" style="position: absolute; top: 1vh;width: 100%;z-index: 999">
+    <div class="container">
+        <div class="row" style="margin-top: 30px;">
+            <div class="col">
+                <a href="/index.html"><img src="./static/logo.png" alt="remark" title="remark"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper" style="position: relative; top: -6vh;">
+    <div class="container main-sentence justify-content-center text-center">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加你的句子</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="layui-input-block">
+                        <textarea class="form-control" rows="3" name="content" id="content" placeholder="内容"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="foot-1" style="position: absolute; bottom: 7vh;width: 100%;">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <span class="btn btn-primary btn-filled btn-xs" id="add_soup">ADD！</span>
+                <br/>
+                <a href="javascript:window.history.go(-1);">返回</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#add_soup').click(function(){
+        var handleUrl="/add";
+        var content=$('#content').val();
+        var qq=$('#qq').val();
+        $.post(handleUrl,{content:content},function(data){
+            switch(data.status){
+                case 1:
+                    layer.alert(data.msg,{icon:6});
+                    setTimeout("location.href='/add_soup.html';", 3000);
+                    break;
+                case 0:
+                    layer.msg(data.msg,{icon:5});
+                    break;
+                default:
+                    layer.msg(data.msg,{icon:5});
+            }
+        },'json')
+    });
+</script>
+<script src="https://cdn.bootcss.com/layer/2.3/layer.js"></script>
+</body>
+</html>
